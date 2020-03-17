@@ -1,0 +1,20 @@
+# Regular packages
+numpy
+scipy
+ipython
+pandas
+
+# plotting
+matplotlib
+seaborn
+
+# jupyter notebooks
+jupyter
+
+# work with images
+pillow
+opencv-python
+scikit-image
+
+# tools
+tqdm
