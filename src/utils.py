@@ -59,7 +59,8 @@ def plot_statistics(values: Tuple[np.ndarray], function: Callable = sns.distplot
         names = [str(i) for i in range(len(values))]
 
     f, axes = plt.subplots(1, len(values), figsize=figsize)
-    # axes = np.atleast_2d(axes)
+    if len(values) == 1:
+        axes = [axes]
     for i in range(len(values)):
         function(values[i], ax=axes[i])
         axes[i].set_title(names[i])
