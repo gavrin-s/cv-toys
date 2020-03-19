@@ -2,7 +2,7 @@
 Plays with Canny  Edge Detector
 See tutorial https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_imgproc/py_canny/py_canny.html
 """
-from typing import Any
+from typing import Any, Optional
 import os
 import uuid
 import cv2
@@ -15,7 +15,7 @@ def nothing(x: Any):
     pass
 
 
-def main(image_source: np.ndarray):
+def main(image_source: np.ndarray, rescale: Optional[float] = None):
     cv2.namedWindow('Image')
 
     # create trackbars for color change
@@ -26,7 +26,10 @@ def main(image_source: np.ndarray):
     image_egdes = cv2.Canny(image_source, 100, 200, L2gradient=True)
 
     while True:
-        cv2.imshow('Image', image_egdes)
+        if rescale is not None:
+            cv2.imshow('Image', cv2.resize(image_egdes, None, fx=rescale, fy=rescale))
+        else:
+            cv2.imshow('Image', image_egdes)
         k = cv2.waitKey(1) & 0xFF
         if k == 27 or k == 113:
             break
@@ -45,5 +48,5 @@ def main(image_source: np.ndarray):
 
 # Use `ESC` or `q` for quit, `s` for save image in tmp folder
 if __name__ == "__main__":
-    image = cv2.imread(os.path.join(DATA_PATH, "spiderman.png"))
-    main(image)
+    image = cv2.imread(os.path.join(DATA_PATH, "likeaboss.jpg"))
+    main(image, rescale=0.5)
